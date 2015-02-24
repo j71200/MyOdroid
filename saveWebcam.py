@@ -14,7 +14,7 @@ import time
 import math
 from multiprocessing import Process, Pipe
 import cv2
-import balloon_config
+# import balloon_config
 
 class BalloonVideo:
 
