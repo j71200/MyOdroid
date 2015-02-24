@@ -20,16 +20,16 @@ class BalloonVideo:
 
     def __init__(self):
         # get image resolution
-        self.img_width = balloon_config.config.get_integer('camera','width',640)
-        self.img_height = balloon_config.config.get_integer('camera','height',480)
+        self.img_width = 640
+        self.img_height = 480
 
         # get image center
         self.img_center_x = self.img_width / 2
         self.img_center_y = self.img_height / 2
         
         # define field of view
-        self.cam_hfov = balloon_config.config.get_float('camera','horizontal-fov',70.42)
-        self.cam_vfov = balloon_config.config.get_float('camera','vertical-fov',43.3)
+        self.cam_hfov = 70.42
+        self.cam_vfov = 43.3
 
         # define video output filename
         self.video_filename = "saveWebcam.avi"
