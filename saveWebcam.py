@@ -31,6 +31,7 @@ class BalloonVideo:
         self.cam_hfov = 70.42
         self.cam_vfov = 43.3
 
+        # BlueZhong
         # define video output filename
         self.video_filename = "saveWebcam.avi"
         # self.video_filename = balloon_config.config.get_string('camera','video_output_file','~/balloon-%Y-%m-%d-%H-%M.avi')
@@ -121,7 +122,7 @@ class BalloonVideo:
 
             # write the latest image into the video - BlueZhong
             video_writer.write(latest_image)
-
+            cv2.imshow('latest_image',latest_image)
 
             # check if the parent wants the image
             if imgcap_connection.poll():
@@ -138,7 +139,7 @@ class BalloonVideo:
 
         # release the  - BlueZhong
         video_writer.release()
-
+        cv2.destroyAllWindows()
 
     # start_background_capture - starts background image capture
     def start_background_capture(self):
