@@ -109,7 +109,7 @@ class BalloonVideo:
         # assign the video writer - BlueZhong
         # video_writer = self.open_video_writer()
 
-
+        datetime
         imageCounter = 0
         while True:
             # constantly get the image from the webcam
@@ -120,7 +120,7 @@ class BalloonVideo:
                 latest_image = image
 
 
-            filename = "MyImage" + str(imageCounter) + " %Y-%m-%d-%H-%M.jpg"
+            filename = "MyImage" + str(imageCounter) + datetime.datetime.now().strftime(" %Y-%m-%d %H:%M:%S") + ".jpg"
             imageCounter = imageCounter + 1
             # write the latest image into the video - BlueZhong
             # video_writer.write(image) # DELETE IT
