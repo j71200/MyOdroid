@@ -119,10 +119,11 @@ class BalloonVideo:
             if success_flag:
                 latest_image = image
 
-
+            filename = "MyImage"
             # write the latest image into the video - BlueZhong
             video_writer.write(latest_image)
-            cv2.imshow('latest_image',latest_image)
+            cv2.imwrite(filename, image)
+            cv2.imshow('latest_image',image)
 
             # check if the parent wants the image
             if imgcap_connection.poll():
