@@ -1,23 +1,13 @@
-"""
-balloon_video.py
 
-This file includes functions to:
-    Initialise the camera
-    Initialise the output video
-
-Image size is held in the balloon_finder.cnf
-"""
-
-import sys
-from os.path import expanduser
-import time
-import math
-from multiprocessing import Process, Pipe
+# import sys
+# from os.path import expanduser
+# import time
+# import math
+# from multiprocessing import Process, Pipe
 import cv2
 import datetime
-# import balloon_config
 
-class BalloonVideo:
+class MyWebcam:
 
     def __init__(self):
         # get image resolution
@@ -32,21 +22,10 @@ class BalloonVideo:
         self.cam_hfov = 70.42
         self.cam_vfov = 43.3
 
-        # BlueZhong
-        # define video output filename
-        # self.video_filename = "webcamVideo.avi"
-        # self.video_filename = balloon_config.config.get_string('camera','video_output_file','~/balloon-%Y-%m-%d-%H-%M.avi')
-        # self.video_filename = expanduser(self.video_filename)
-        # self.video_filename = time.strftime(self.video_filename)
-
         # background image processing variables
         self.proc = None            # background process object
         self.parent_conn = None     # parent end of communicatoin pipe
         self.img_counter = 0        # num images requested so far
-
-    # __str__ - print position vector as string
-    def __str__(self):
-        return "BalloonVideo Object W:%d H:%d" % (self.img_width, self.img_height)
 
     # get_camera - initialises camera and returns VideoCapture object 
     def get_camera(self):
@@ -62,37 +41,6 @@ class BalloonVideo:
 
         return self.camera
 
-    # open_video_writer - begin writing to video file
-    def open_video_writer(self):
-        # Define the codec and create VideoWriter object
-        # Note: setting ex to -1 will display pop-up requesting user choose the encoder
-        ex = int(cv2.cv.CV_FOURCC('M','J','P','G'))
-        self.video_writer = cv2.VideoWriter(self.video_filename, ex, 25, (self.img_width,self.img_height))
-    
-        return self.video_writer
-
-    # pixels_to_angle_x - converts a number of pixels into an angle in radians 
-    def pixels_to_angle_x(self, num_pixels):
-        return num_pixels * math.radians(self.cam_hfov) / self.img_width
-    
-    # pixels_to_angle_y - converts a number of pixels into an angle in radians 
-    def pixels_to_angle_y(self, num_pixels):
-        return num_pixels * math.radians(self.cam_vfov) / self.img_height
-    
-    # angle_to_pixels_x - converts a horizontal angle (i.e. yaw) to a number of pixels
-    #    angle : angle in radians
-    def angle_to_pixels_x(self, angle):
-        return int(angle * self.img_width / math.radians(self.cam_hfov))
-    
-    # angle_to_pixels_y - converts a vertical angle (i.e. pitch) to a number of pixels
-    #    angle : angle in radians 
-    def angle_to_pixels_y(self, angle):
-        return int(angle * self.img_height / math.radians(self.cam_vfov))
-
-    #
-    # background image processing routines
-    #
-
     # image_capture_background - captures all images from the camera in the background and returning the latest image via the pipe when the parent requests it
     def image_capture_background(self, imgcap_connection):
         # exit immediately if imgcap_connection is invalid
@@ -106,12 +54,6 @@ class BalloonVideo:
         # clear latest image
         latest_image = None
 
-
-        # assign the video writer - BlueZhong
-        # video_writer = self.open_video_writer()
-
-        datetime
-        imageCounter = 0
         while True:
             # constantly get the image from the webcam
             success_flag, image=camera.read()
@@ -120,13 +62,9 @@ class BalloonVideo:
             if success_flag:
                 latest_image = image
 
-
             filename = "webcam photo " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ".jpg"
-            imageCounter = imageCounter + 1
             # write the latest image into the video - BlueZhong
-            # video_writer.write(image) # DELETE IT
             cv2.imwrite(filename, image)
-            # cv2.imshow('latest_image',image) # DELETE IT
 
             # check if the parent wants the image
             if imgcap_connection.poll():
@@ -140,10 +78,6 @@ class BalloonVideo:
 
         # release camera when exiting
         camera.release()
-
-        # release the  - BlueZhong
-        # video_writer.release() # DELETE IT
-        # cv2.destroyAllWindows() # DELETE IT
 
     # start_background_capture - starts background image capture
     def start_background_capture(self):
@@ -212,7 +146,7 @@ class BalloonVideo:
         self.video_writer = self.open_video_writer()
 
 # create a single global object
-balloon_video = BalloonVideo()
+my_webcam = MyWebcam()
 
 if __name__ == "__main__":
-    balloon_video.main()
+    my_webcam.main()
