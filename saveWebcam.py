@@ -33,7 +33,7 @@ class BalloonVideo:
 
         # BlueZhong
         # define video output filename
-        self.video_filename = "webcamVideo.avi"
+        # self.video_filename = "webcamVideo.avi"
         # self.video_filename = balloon_config.config.get_string('camera','video_output_file','~/balloon-%Y-%m-%d-%H-%M.avi')
         # self.video_filename = expanduser(self.video_filename)
         # self.video_filename = time.strftime(self.video_filename)
@@ -107,7 +107,7 @@ class BalloonVideo:
 
 
         # assign the video writer - BlueZhong
-        video_writer = self.open_video_writer()
+        # video_writer = self.open_video_writer()
 
 
         imageCounter = 0
@@ -120,12 +120,12 @@ class BalloonVideo:
                 latest_image = image
 
 
-            filename = "MyImage" + str(imageCounter) + ".jpg"
+            filename = "MyImage" + str(imageCounter) + " %Y-%m-%d-%H-%M.jpg"
             imageCounter = imageCounter + 1
             # write the latest image into the video - BlueZhong
-            video_writer.write(image)
+            # video_writer.write(image) # DELETE IT
             cv2.imwrite(filename, image)
-            cv2.imshow('latest_image',image)
+            # cv2.imshow('latest_image',image) # DELETE IT
 
             # check if the parent wants the image
             if imgcap_connection.poll():
@@ -141,8 +141,8 @@ class BalloonVideo:
         camera.release()
 
         # release the  - BlueZhong
-        video_writer.release()
-        cv2.destroyAllWindows()
+        # video_writer.release() # DELETE IT
+        # cv2.destroyAllWindows() # DELETE IT
 
     # start_background_capture - starts background image capture
     def start_background_capture(self):
