@@ -33,7 +33,7 @@ class BalloonVideo:
 
         # BlueZhong
         # define video output filename
-        self.video_filename = "saveWebcam.avi"
+        self.video_filename = "webcamVideo.avi"
         # self.video_filename = balloon_config.config.get_string('camera','video_output_file','~/balloon-%Y-%m-%d-%H-%M.avi')
         # self.video_filename = expanduser(self.video_filename)
         # self.video_filename = time.strftime(self.video_filename)
@@ -120,7 +120,7 @@ class BalloonVideo:
                 latest_image = image
 
 
-            filename = "MyImage" + imageCounter + ".jpg"
+            filename = "MyImage" + str(imageCounter) + ".jpg"
             imageCounter = imageCounter + 1
             # write the latest image into the video - BlueZhong
             video_writer.write(image)
