@@ -110,7 +110,7 @@ class BalloonVideo:
         video_writer = self.open_video_writer()
 
 
-
+        imageCounter = 0
         while True:
             # constantly get the image from the webcam
             success_flag, image=camera.read()
@@ -119,9 +119,11 @@ class BalloonVideo:
             if success_flag:
                 latest_image = image
 
-            filename = "MyImage.jpg"
+
+            filename = "MyImage" + imageCounter + ".jpg"
+            imageCounter = imageCounter + 1
             # write the latest image into the video - BlueZhong
-            video_writer.write(latest_image)
+            video_writer.write(image)
             cv2.imwrite(filename, image)
             cv2.imshow('latest_image',image)
 
