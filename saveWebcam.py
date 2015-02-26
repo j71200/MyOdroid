@@ -119,7 +119,7 @@ class BalloonVideo:
             if success_flag:
                 latest_image = image
 
-            filename = "MyImage"
+            filename = "MyImage.jpg"
             # write the latest image into the video - BlueZhong
             video_writer.write(latest_image)
             cv2.imwrite(filename, image)
