@@ -130,7 +130,7 @@ class MyWebcam:
             # else:
             #     print "no image"
 
-            filename = "webcamPhoto " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ".jpg"
+            filename = "webcam photo " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ".jpg"
             # write the latest image into the video - BlueZhong
             cv2.imwrite(filename, img)
 
