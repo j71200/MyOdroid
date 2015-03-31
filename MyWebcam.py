@@ -62,9 +62,9 @@ class MyWebcam:
             if success_flag:
                 latest_image = image
 
-            filename = "webcam photo " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ".jpg"
-            # write the latest image into the video - BlueZhong
-            cv2.imwrite(filename, image)
+            # filename = "webcam photo " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ".jpg"
+            # # write the latest image into the video - BlueZhong
+            # cv2.imwrite(filename, image)
 
             # check if the parent wants the image
             if imgcap_connection.poll():
@@ -123,20 +123,24 @@ class MyWebcam:
             # send request to image capture for image
             img = self.get_image()
     
-            # check image is valid
-            if not img is None:
-                # display image
-                cv2.imshow ('image_display', img)
-            else:
-                print "no image"
-    
+            # # check image is valid
+            # if not img is None:
+            #     # display image
+            #     cv2.imshow ('image_display', img)
+            # else:
+            #     print "no image"
+
+            filename = "webcamPhoto " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ".jpg"
+            # write the latest image into the video - BlueZhong
+            cv2.imwrite(filename, image)
+
             # check for ESC key being pressed
             k = cv2.waitKey(5) & 0xFF
             if k == 27:
                 break
     
             # take a rest for a bit
-            time.sleep(0.1)
+            time.sleep(2.5)
 
         # send exit command to image capture process
         self.stop_background_capture()
