@@ -132,7 +132,7 @@ class MyWebcam:
 
             filename = "webcamPhoto " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ".jpg"
             # write the latest image into the video - BlueZhong
-            cv2.imwrite(filename, image)
+            cv2.imwrite(filename, img)
 
             # check for ESC key being pressed
             k = cv2.waitKey(5) & 0xFF
